@@ -1,7 +1,12 @@
 [package]
 name = "witnet-vanity"
 version = "0.1.0"
+description = "A simple CLI tool to generate Witnet vanity addresses written in Rust."
+keywords = ["witnet", "crypto", "address", "vanity", "generator"]
+repository = "https://github.com/stampery-labs/witnet-vanity"
 authors = ["Stampery Labs"]
+readme = "README.md"
+license-file = "LICENSE"
 edition = "2018"
 
 [dependencies]
