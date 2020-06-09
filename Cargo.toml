@@ -6,7 +6,7 @@ keywords = ["witnet", "crypto", "address", "vanity", "generator"]
 repository = "https://github.com/stampery-labs/witnet-vanity"
 authors = ["Stampery Labs"]
 readme = "README.md"
-license-file = "LICENSE"
+license = "MIT"
 edition = "2018"
 
 [dependencies]
