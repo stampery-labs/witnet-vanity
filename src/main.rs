@@ -121,6 +121,9 @@ fn run(
                 break;
             }
 
+            // Set success flag and break
+            success.store(true, Ordering::SeqCst);
+
             // Bytes to encode
             let capacity = 1       // 1 byte for depth (keypath is `0`)
                 + 32                    // 32 bytes for chain code
@@ -148,8 +151,6 @@ fn run(
             println!("\tPrivate key:\t{}", xprv);
             println!("\tAddress:\t{}", address);
 
-            // Set success flag and break
-            success.store(true, Ordering::SeqCst);
             break;
         }
 
