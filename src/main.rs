@@ -52,7 +52,7 @@ impl ExtProgressBar {
         obj.pb.set_style(ProgressStyle::default_bar()
             //.template("{spinner:.green} [{elapsed_precise}] [{bar:80.cyan/blue}] {pos:>7} / {len:7} {msg} (ETA: {eta})")
             .template(&format!(
-                "{{spinner:.green}} [{{elapsed_precise}}] [{{bar:80.cyan/blue}}] {{msg}} (ETA: {{eta}})"
+                "{{spinner:.green}} [{{elapsed_precise}}] [{{bar:50.cyan/blue}}] {{msg}} (ETA: {{eta}})"
             ))
             .progress_chars("#>-"));
 
@@ -81,10 +81,8 @@ impl ExtProgressBar {
             NumberPrefix::Prefixed(prefix, n) => format!("{:.1}{}", n, prefix),
         };
 
-        self.pb.set_message(&format!(
-            "{}/{} estimated tries",
-            position_msg, self.total_msg
-        ));
+        self.pb
+            .set_message(&format!("{}/{} tries", position_msg, self.total_msg));
     }
 
     fn finish(&self, total_count: u64, msg: &str) {
@@ -123,6 +121,9 @@ fn run(
                 break;
             }
 
+            // Set success flag and break
+            success.store(true, Ordering::SeqCst);
+
             // Bytes to encode
             let capacity = 1       // 1 byte for depth (keypath is `0`)
                 + 32                    // 32 bytes for chain code
@@ -150,8 +151,6 @@ fn run(
             println!("\tPrivate key:\t{}", xprv);
             println!("\tAddress:\t{}", address);
 
-            // Set success flag and break
-            success.store(true, Ordering::SeqCst);
             break;
         }
 
